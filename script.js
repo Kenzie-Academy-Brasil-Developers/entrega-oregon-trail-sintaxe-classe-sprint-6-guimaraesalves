@@ -6,15 +6,14 @@ class Traveler {
         this.food = 1;
         this.isHealthy = true;
     }
-}
 
-//função caçar
-function hunt(){
-    return this.food = this.food + 2;
-};
+    //função caçar
+    hunt(){
+        return this.food = this.food + 2;
+    };
 
-// função comer
-function eat() {
+    // função comer
+    eat() {
     if (this.food == 0){
         this.isHealthy = false;
     }
@@ -23,45 +22,67 @@ function eat() {
         return this.food = this.food - 1;
     }
 };
+}
+
+
+
+
+
 
 //Criação da Carroça;
 
-class Wagon extends Traveler {
-    constructor(capacity) {
-        super(nome, food, isHealthy);
-        this._capacity = capacity;
-        this._passengers = [];
+
+
+class Wagon {
+    constructor(capacity) {       
+        this.capacity = capacity;
+        this.passengers = [];
     }
 
-    get availableSeatCount() {
-        return this._capacity;
+    getAvailableSeatCount() {
+        return this.capacity;
+    }  
+
+    join(nome){
+        if(this.capacity > 0){
+            this.passengers.push(nome);
+            this.capacity -= 1
+        }
     }
 
-    set availableSeatCount(value) {
-        return this._capacity - value;
+    shouldQuarantine(passengers){ 
+        //fazer umm for dentro da lista de passageiros para ver se tem algum doente;
+        for(let temDoente = 0; temDoente < passengers; temDoente++){
+
+            if (this.passengers.isHealthy === true){
+                return true
+            }
+        }
+        
     }
+
+    totalFood(){
+        let tot = 0
+        for (let i = 0; i < this.passengers; i++){
+            tot += this.passengers.food;
+        }
+
+        return tot
+    }
+
 }
+    
 
 
-function join(){
-    if(this._capacity > 0){
-        this._passengers.push(1)
-    }
-}
+   
+   
+  
 
-function shouldQuarantine(){
-    if (this._passengers.isHealthy == true){
-        return true
-    }
-}
- function totalFood(){
-     let tot = 0
-     for (let i = 0; i < this._passengers.length; i++){
-         tot += this._passengers.food
-     }
+    
+    
 
-     return tot
- }
+
+
 
 
  // Criar uma carroça que comporta 2 pessoas
@@ -86,3 +107,4 @@ juan.eat(); // juan agora está com fome (doente)
  
 console.log(`${wagon.shouldQuarantine()} should be true since juan is sick`);
 console.log(`${wagon.totalFood()} should be 3`);
+
